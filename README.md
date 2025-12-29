@@ -1,3 +1,5 @@
+> **⚠ This branch targets Windows UI rendering and system font replacement.**
+
 # Sarasa Gothic (更纱黑体 / 更紗黑體 / 更紗ゴシック / 사라사고딕)
 
 This is SARASA GOTHIC, a CJK composite font based on Inter, Iosevka and Source Han Sans.
@@ -21,6 +23,14 @@ npm run build ttf
 ```
 
 to build the TTF files, it would be in `out/ttf` directory.
+
+To build unhinted TTF files, run
+
+```bash
+npm run build ttf-unhinted
+```
+
+instead, the files would be in `out/ttf` directory.
 
 To build TTC, type
 

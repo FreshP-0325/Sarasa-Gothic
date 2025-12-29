@@ -39,7 +39,7 @@ build.setSelfTracking();
 // Entrypoint
 const Start = phony("all", async t => {
 	const [config, version] = await t.need(Config, Version);
-	await t.need(Ttf, Ttc);
+	await t.need(Ttf, Ttc, TtfUnhinted);
 
 	let archiveTargets = [
 		TtcArchive(`7z`, `TTC`, version),
@@ -93,6 +93,10 @@ const Ttc = phony(`ttc`, async t => {
 
 const Ttf = phony(`ttf`, async t => {
 	await t.need(TtfFontFiles`TTF`, TtfFontFiles`TTF-Unhinted`);
+});
+
+const TtfUnhinted = phony(`ttf-unhinted`, async t => {
+	await t.need(TtfUnhintedFontFiles`TTF-Unhinted`);
 });
 
 const CheckTtfAutoHintExists = oracle("oracle:check-ttfautohint-exists", async target => {
@@ -197,10 +201,11 @@ const BreakShsTtc = task.make(
 		const [config] = await $.need(Config, de(`${BUILD}/shs`));
 		const shsSourceMap = config.shsSourceMap;
 		const shsSuffix = shsSourceMap.styleMap[weight] || weight;
+		const isCff = shsSourceMap.isCff;
 		await run(OTC2OTF, `${SOURCES}/shs/${shsSourceMap.defaultRegion}-${shsSuffix}.ttc`);
 		for (const regionID in shsSourceMap.region) {
 			const shsPrefix = shsSourceMap.region[regionID];
-			const partName = `${shsPrefix}-${shsSuffix}.otf`;
+			const partName = `${shsPrefix}-${shsSuffix}` + (isCff ? `.otf` : `.ttf`);
 			if (await fs.pathExists(`${SOURCES}/shs/${partName}`)) {
 				await rm(`${BUILD}/shs/${partName}`);
 				await mv(`${SOURCES}/shs/${partName}`, `${BUILD}/shs/${partName}`);
@@ -216,12 +221,17 @@ const ShsTtf = file.make(
 		const shsSourceMap = config.shsSourceMap;
 		const shsPrefix = shsSourceMap.region[region];
 		const shsSuffix = shsSourceMap.styleMap[weight] || weight;
-		const [, $1] = await t.need(de(out.dir), fu`${BUILD}/shs/${shsPrefix}-${shsSuffix}.otf`);
-		await run("otf2ttf", "-o", out.full, $1.full);
+		const isCff = shsSourceMap.isCff;
+		if (isCff) {
+			const [, $1] = await t.need(de(out.dir), fu`${BUILD}/shs/${region}-${shsSuffix}.otf`);
+			await run("otf2ttf", "-o", out.full, $1.full);
+		} else {
+			await mv(`${BUILD}/shs/${shsPrefix}-${shsSuffix}.ttf`, out.full);
+		}
 	}
 );
 
-const ShsCassicalOverrideTtf = file.make(
+const ShsClassicalOverrideTtf = file.make(
 	weight => `${BUILD}/shs-classical-override/${weight}.ttf`,
 	async (t, out, weight) => {
 		const [config] = await t.need(Config);
@@ -243,7 +253,7 @@ const Kanji0 = file.make(
 		const [$1] = await t.need(ShsTtf(region, style), de(out.dir));
 		let $2 = null;
 		if (region === config.shsSourceMap.classicalRegion) {
-			[$2] = await t.need(ShsCassicalOverrideTtf(style));
+			[$2] = await t.need(ShsClassicalOverrideTtf(style));
 		}
 		await RunFontBuildTask("make/kanji/build.mjs", {
 			main: $1.full,
@@ -320,7 +330,7 @@ const LatinSource = file.make(
 	async (t, out, group, style) => {
 		const [config] = await t.need(Config, Scripts, de(out.dir));
 		const latinCfg = config.latinGroups[group] || {};
-		let sourceStyle = style;
+		const sourceStyle = latinCfg.styleMap[style] || style;
 		const isCff = latinCfg.isCff;
 		const sourceFile = `sources/${group}/${group}-${sourceStyle}` + (isCff ? ".otf" : ".ttf");
 		const [source] = await t.need(fu(sourceFile));
@@ -652,6 +662,20 @@ const TtfFontFiles = task.make(
 			for (let sf of config.subfamilyOrder)
 				for (let st of config.styleOrder) {
 					reqs.push(prodT(f, sf, st));
+				}
+		await t.need(...reqs);
+	}
+);
+
+const TtfUnhintedFontFiles = task.make(
+	infix => `intermediate::ttfFontFiles::${infix}`,
+	async (t, infix) => {
+		const [config] = await t.need(Config);
+		let reqs = [];
+		for (let f of config.familyOrder)
+			for (let sf of config.subfamilyOrder)
+				for (let st of config.styleOrder) {
+					reqs.push(ProdUnhinted(f, sf, st));
 				}
 		await t.need(...reqs);
 	}

@@ -44,6 +44,28 @@ export function setFontMetadata(font, fMono, selectorList, encodings, namings) {
 		Ot.Head.Flags.LeftSidebearingAtX0 |
 		Ot.Head.Flags.ForcePpemToBeInteger |
 		Ot.Head.Flags.InstructionsMayDependOnPointSize;
+
+	// Set metrics
+	font.os2.sTypoAscender = 1041;
+	font.os2.usWinAscent = 1041;
+	font.os2.sCapHeight = 800;
+
+	setLanguageMetadata(font, encodings);
+}
+
+// Set designed languages and supported languages
+function setLanguageMetadata(font, encodings) {
+	font.meta = new Ot.Meta.Table();
+	const data = [];
+	if (encodings.jis) data.push(["dlng", "Hani, Hira, Hrkt, Jpan, Kana"]);
+	if (encodings.gbk) data.push(["dlng", "Hans"]);
+	if (encodings.korean) data.push(["dlng", "Hang, Hani, Kore"]);
+	if (encodings.big5) data.push(["dlng", "Bopo, Hant"]);
+	data.push([
+		"slng",
+		"Bopo, Cyrl, Grek, Hang, Hani, Hans, Hant, Hira, Hrkt, Jpan, Kana, Kore, Latn"
+	]);
+	font.meta.data = data;
 }
 
 // Naming functions
@@ -80,7 +102,7 @@ const MANUFACTURER = 8;
 const DESIGNER = 9;
 const PREFERRED_FAMILY = 16;
 const PREFERRED_STYLE = 17;
-const langIDMap = { en_US: 1033, zh_CN: 2052, zh_TW: 1028, zh_HK: 3076, ja_JP: 1041 };
+const langIDMap = { en_US: 1033, zh_CN: 2052, zh_TW: 1028, zh_HK: 3076, ja_JP: 1041, ko_KR: 1042 };
 
 function nameEntry(p, e, l, n, str) {
 	return { platformID: p, encodingID: e, languageID: l, nameID: n, value: str };

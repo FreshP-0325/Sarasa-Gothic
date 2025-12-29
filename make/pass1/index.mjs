@@ -65,7 +65,7 @@ async function pass(argv) {
 		{
 			en_US: {
 				copyright: globalConfig.copyright,
-				version: `Version ${argv.version}`,
+				version: globalConfig.version,
 				family: globalConfig.families[argv.family].naming.en_US + " " + argv.subfamily,
 				style: globalConfig.styles[argv.style].name
 			},
@@ -83,6 +83,10 @@ async function pass(argv) {
 			},
 			ja_JP: {
 				family: globalConfig.families[argv.family].naming.ja_JP + " " + argv.subfamily,
+				style: globalConfig.styles[argv.style].name
+			},
+			ko_KR: {
+				family: globalConfig.families[argv.family].naming.ko_KR + " " + argv.subfamily,
 				style: globalConfig.styles[argv.style].name
 			}
 		}

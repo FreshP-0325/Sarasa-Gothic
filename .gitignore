@@ -24,3 +24,5 @@ ns-proof-page/fonts
 .private*
 config.private.json
 .vscode
+sources/shs/*.otf
+sources/shs/*.ttf

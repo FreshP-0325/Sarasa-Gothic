@@ -1,4 +1,6 @@
-[English](https://github.com/be5invis/Sarasa-Gothic#readme) [简体中文](README.zh_CN.md)
+[English](README.md) [简体中文](README.zh_CN.md)
+
+> **⚠ This branch targets Windows UI rendering and system font replacement.**
 
 # Sarasa Gothic (更纱黑体 / 更紗黑體)
 
@@ -78,6 +80,12 @@ npm install
 
 ```bash
 npm run build ttf
+```
+
+只生成未经微调的 TTF 文件，将会导出到 `out/ttf` 目录。
+
+```bash
+npm run build ttf-unhinted
 ```
 
 生成 TTC 文件，将会导出到 `out/ttc` 目录。
