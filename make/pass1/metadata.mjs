@@ -63,7 +63,7 @@ function setLanguageMetadata(font, encodings) {
 	if (encodings.big5) data.push(["dlng", "Bopo, Hant"]);
 	data.push([
 		"slng",
-		"Bopo, Cyrl, Grek, Hang, Hani, Hans, Hant, Hira, Hrkt, Jpan, Kana, Kore, Latn"
+		"Arab, Armn, Bopo, Cyrl, Geok, Geor, Grek, Hang, Hani, Hans, Hant, Hebr, Hira, Hrkt, Jpan, Kana, Kore, Latn, Lisu"
 	]);
 	font.meta.data = data;
 }

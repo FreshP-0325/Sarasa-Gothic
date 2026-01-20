@@ -6,7 +6,7 @@
 	"families": {
 		"Gothic": {
 			"isPWID": true,
-			"latinGroup": "Inter",
+			"latinGroup": "SegoeUI",
 			"naming": {
 				"en_US": "Sarasa Gothic",
 				"ja_JP": "更紗ゴシック",
@@ -18,14 +18,10 @@
 		}
 	},
 	"styleOrder": [
-		"ExtraLight",
-		"ExtraLightItalic",
 		"Light",
 		"LightItalic",
 		"Regular",
 		"Italic",
-		"Medium",
-		"MediumItalic",
 		"SemiBold",
 		"SemiBoldItalic",
 		"Bold",
@@ -34,12 +30,10 @@
 		"HeavyItalic"
 	],
 	"latinGroups": {
-		"Inter": {
+		"SegoeUI": {
 			"isCff": false,
 			"bakeFeatures": [],
-			"dropFeatures": [
-				"calt"
-			],
+			"dropFeatures": [],
 			"styleMap": {
 				"Heavy": "Black",
 				"HeavyItalic": "BlackItalic"
@@ -47,13 +41,6 @@
 		}
 	},
 	"styles": {
-		"ExtraLight": {
-			"name": "ExtraLight"
-		},
-		"ExtraLightItalic": {
-			"name": "ExtraLight Italic",
-			"uprightStyleMap": "ExtraLight"
-		},
 		"Light": {
 			"name": "Light"
 		},
@@ -67,13 +54,6 @@
 		"Italic": {
 			"name": "Italic",
 			"uprightStyleMap": "Regular"
-		},
-		"Medium": {
-			"name": "Medium"
-		},
-		"MediumItalic": {
-			"name": "Medium Italic",
-			"uprightStyleMap": "Medium"
 		},
 		"SemiBold": {
 			"name": "SemiBold"
@@ -130,8 +110,8 @@
 		"SC": ["en_US", "zh_CN"],
 		"TC": ["en_US", "zh_TW"]
 	},
-	"copyright": "[Sarasa Gothic] Copyright (c) 2015-2025, Renzhi Li (aka. Belleve Invis, belleve@typeof.net). [Inter] Copyright 2016 The Inter Project Authors [Source Han Sans] © 2014-2025 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
-	"version": "Version 0.0.1 [Sarasa Gothic] Version 1.0.35 [Inter] Version 4.001;git-9221beed3 [Source Han Sans] Version 2.005;addfeatures 5.0.0b21",
+	"copyright": "[Sarasa Gothic] Copyright (c) 2015-2025, Renzhi Li (aka. Belleve Invis, belleve@typeof.net). [Segoe UI] © 2025 Microsoft Corporation. All Rights Reserved. [Source Han Sans] © 2014-2025 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.",
+	"version": "Version 0.0.1 [Sarasa Gothic] Version 1.0.35 [Segoe UI] Version 5.70 [Source Han Sans] Version 2.005;addfeatures 5.0.0b21",
 	"shsSourceMap": {
 		"defaultRegion": "SourceHanSans",
 		"region": {
