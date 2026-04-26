@@ -46,9 +46,9 @@ export function setFontMetadata(font, fMono, selectorList, encodings, namings) {
 		Ot.Head.Flags.InstructionsMayDependOnPointSize;
 
 	// Set metrics
-	font.os2.sTypoAscender = 1041;
-	font.os2.usWinAscent = 1041;
-	font.os2.sCapHeight = 800;
+	font.os2.sTypoAscender = 1005;
+	font.os2.usWinAscent = 1005;
+	font.os2.sCapHeight = 728;
 
 	setLanguageMetadata(font, encodings);
 }
