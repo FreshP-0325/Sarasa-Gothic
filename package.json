@@ -1,10 +1,10 @@
 {
 	"name": "sarasa-gothic",
-	"version": "1.0.37",
+	"version": "1.0.39",
 	"main": "./run",
 	"scripts": {
-		"lint": "eslint",
-		"lint:fix": "eslint --fix",
+		"lint": "biome check .",
+		"lint:fix": "biome check . --write",
 		"build": "verda -f verdafile.mjs",
 		"clean": "verda -f verdafile.mjs clean",
 		"full-clean": "verda -f verdafile.mjs full-clean",
@@ -15,19 +15,16 @@
 		"@chlorophytum/font-format-ttf": "^0.50.0",
 		"@chlorophytum/hint-store-provider-file": "^0.50.0",
 		"@chlorophytum/hm-combine": "^0.50.0",
-		"@chlorophytum/hm-ideograph": "^0.50.0",
+		"@chlorophytum/hm-ideograph": "^0.50.1",
 		"@chlorophytum/hm-select-glyphs": "^0.50.0",
-		"fs-extra": "^11.2.0",
-		"ot-builder": "^1.7.4",
-		"otb-ttc-bundle": "^1.7.4",
-		"verda": "^1.12.2",
-		"which": "^4.0.0"
+		"fs-extra": "^11.3.4",
+		"ot-builder": "^1.7.9",
+		"otb-ttc-bundle": "^1.7.9",
+		"verda": "^1.13.0",
+		"which": "^6.0.1"
 	},
 	"devDependencies": {
-		"eslint": "^9.8.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-prettier": "^5.2.1",
-		"prettier": "^3.3.3"
+		"@biomejs/biome": "^2.4.11"
 	},
 	"engines": {
 		"node": ">=20.0.0"
