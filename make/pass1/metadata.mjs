@@ -50,7 +50,7 @@ export function setFontMetadata(font, fMono, selectorList, encodings, namings) {
 	font.hhea.descender = -321;
 	font.os2.sTypoAscender = 1049;
 	font.os2.sTypoDescender = -321;
-	font.os2.winAscent = 1049;
+	font.os2.usWinAscent = 1049;
 	font.os2.usWinDescent = 321;
 
 	setLanguageMetadata(font, encodings);
